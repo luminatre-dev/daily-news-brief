@@ -1,0 +1,34 @@
+name: Daily News Update
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 매일 23:00 UTC = 07:00 SGT
+  workflow_dispatch:        # 수동 실행도 가능
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests beautifulsoup4 pytz
+
+      - name: Fetch news with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python fetch_news.py
+
+      - name: Commit & push news data
+        run: |
+          git config user.name "News Bot"
+          git config user.email "bot@example.com"
+          git add news_data.json
+          git diff --staged --quiet || git commit -m "news: update $(date +'%Y-%m-%d %H:%M SGT')"
+          git push
