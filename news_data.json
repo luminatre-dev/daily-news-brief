@@ -1,51 +1,96 @@
 {
-  "updated_at": "2026-03-30T16:43:53.964659+08:00",
-  "updated_at_display": "2026-03-30 16:43 SGT",
+  "updated_at": "2026-03-30T17:06:20.713678+08:00",
+  "updated_at_display": "2026-03-30 17:06 SGT",
   "news": [
     {
       "title": "SBS Transit Bus Fire on Tampines Expressway",
-      "summary": "SBS 트랜짓 버스가 탐피네스 고속도로에서 화재가 발생하여 교통 통제가 이뤄졌습니다.",
+      "summary": "싱가포르 탐피네스 고속도로에서 SBS 트랜짓 버스가 화재로 출화사고가 발생했다.",
       "source": "Yahoo News Singapore",
       "url": "https://sg.news.yahoo.com/",
       "category": "sg",
       "categoryLabel": "싱가포르",
-      "time": "2026-03-30T10:30:00Z"
+      "time": "2026-03-30T09:00:00Z"
     },
     {
-      "title": "US-Israel War on Iran Escalates - Day 30",
-      "summary": "미국-이스라엘의 이란 전쟁이 30일째 계속되면서 테헤란에서 강력한 폭발이 발생하고 글로벌 에너지 위기가 악화되고 있습니다.",
+      "title": "PM Wong: Singapore and ASEAN to Stay Neutral in Global Powers Rivalry",
+      "summary": "로렌스 웡 총리가 싱가포르와 아세안은 동서 지정학적 갈등에서 중립을 유지할 것이라고 발표했다.",
+      "source": "Malay Mail",
+      "url": "https://www.malaymail.com/news/singapore/2026/03/29/singapore-asean-to-stay-open-and-inclusive-will-not-choose-sides-says-pm-wong/214349",
+      "category": "sg",
+      "categoryLabel": "싱가포르",
+      "time": "2026-03-29T19:14:00Z"
+    },
+    {
+      "title": "US-Israel War on Iran Enters Day 30",
+      "summary": "미국-이스라엘의 이란 공습이 30일째 지속되며 글로벌 에너지 위기가 심화되고 있다.",
       "source": "Al Jazeera",
       "url": "https://www.aljazeera.com/news/2026/3/29/us-israel-war-on-iran-whats-happening-on-day-30-of-attacks",
       "category": "global",
       "categoryLabel": "글로벌",
-      "time": "2026-03-30T08:00:00Z"
+      "time": "2026-03-29T12:00:00Z"
     },
     {
-      "title": "MBK Partners Sells Golfzon County",
-      "summary": "MBK파트너스가 골프존카운티 매각 절차에 들어가며 모건스탠리와 삼정KPMG가 매각 주관사로 선정되었습니다.",
-      "source": "InvestChosun",
-      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/25/2026032580218.html",
-      "category": "alt",
-      "categoryLabel": "대체투자",
-      "time": "2026-03-25T09:00:00Z"
+      "title": "ICAO Launches New Aviation Standards and Border Security System",
+      "summary": "국제민간항공기구가 새로운 항공소음 기준과 차세대 국경보안 시스템을 도입한다고 발표했다.",
+      "source": "Asian Aviation",
+      "url": "https://asianaviation.com/icao-news-in-brief-30-march-2026/",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "2026-03-30T05:00:00Z"
     },
     {
-      "title": "K-NVIDIA National Growth Fund Competition",
-      "summary": "'K-엔비디아'로 불리는 리벨리온에 대한 국민성장펀드 투자 유치 경쟁이 치열해지며 사모펀드들의 물밑 작업이 활발합니다.",
-      "source": "InvestChosun",
+      "title": "K-엔비디아 국민성장펀드 투자유치 경쟁 치열",
+      "summary": "리벨리온 등 AI 반도체 기업 대상 국민성장펀드 직접투자를 위해 사모펀드와 벤처캐피탈이 치열한 경쟁을 벌이고 있다.",
+      "source": "인베스트조선",
       "url": "https://www.investchosun.com/site/data/html_dir/2026/03/24/2026032480176.html",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-03-24T10:30:00Z"
+      "time": "2026-03-24T08:00:00Z"
     },
     {
-      "title": "Private Equity Fund Regulation Strengthened",
-      "summary": "금융위원회가 기관전용 사모펀드 규율을 강화하며 '원스트라이크 아웃' 제도 도입과 GP 보고 의무를 신설했습니다.",
-      "source": "DealSite",
-      "url": "https://dealsite.co.kr/categories/075000",
+      "title": "한국 스타트업 평균 투자액 증가, 거래건수는 감소",
+      "summary": "더브이씨 분석에 따르면 2025년 한국 스타트업의 평균 투자규모가 늘었지만 전체 투자건수는 줄어들었다고 발표했다.",
+      "source": "아시아경제",
+      "url": "https://cm.asiae.co.kr/en/article/alternative-investment/2026010209360325566",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-03-22T14:00:00Z"
+      "time": "2026-01-02T09:00:00Z"
+    },
+    {
+      "title": "중소벤처부 2026년 예산 16.52조원 확정, 모태펀드는 축소",
+      "summary": "중소벤처부가 2026년 예산을 16.52조원으로 확정했으나 모태펀드는 당초 계획 대비 축소된 8200억원으로 편성됐다.",
+      "source": "KoreaTechDesk",
+      "url": "https://koreatechdesk.com/",
+      "category": "alt",
+      "categoryLabel": "대체투자",
+      "time": "2026-01-15T10:00:00Z"
+    },
+    {
+      "title": "Trump says US could ‘take the oil in Iran’",
+      "summary": "US president tells the FT he is considering seizing strategic Kharg Island even as negotiations cont...",
+      "source": "FT",
+      "url": "https://www.ft.com/content/3bd9fb6c-2985-4d24-b86b-23b7884031f5",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
+    },
+    {
+      "title": "Oil rises to $116 as Trump stokes fears of protracted conflict",
+      "summary": "Traders weigh signs of escalating conflict as more US troops arrive in region and Yemen enters war",
+      "source": "FT",
+      "url": "https://www.ft.com/content/dcf55026-1c12-4643-84c2-d68f86b012eb",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
+    },
+    {
+      "title": "TotalEnergies made bumper profit on Middle East oil bet",
+      "summary": "Fewer contracts increased volatility and made it possible for a single trader to dominate the market",
+      "source": "FT",
+      "url": "https://www.ft.com/content/eba87bd4-7e55-4a7b-b14c-71bf486bfd31",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
     }
   ]
 }
