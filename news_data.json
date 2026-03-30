@@ -1,69 +1,69 @@
 {
-  "updated_at": "2026-03-30T17:06:20.713678+08:00",
-  "updated_at_display": "2026-03-30 17:06 SGT",
+  "updated_at": "2026-03-30T17:24:49.301010+08:00",
+  "updated_at_display": "2026-03-30 17:24 SGT",
   "news": [
     {
-      "title": "SBS Transit Bus Fire on Tampines Expressway",
-      "summary": "싱가포르 탐피네스 고속도로에서 SBS 트랜짓 버스가 화재로 출화사고가 발생했다.",
+      "title": "SBS Transit bus fire on Tampines Expressway disrupts morning traffic",
+      "summary": "3월 30일 아침 탐피네스 고속도로에서 SBS Transit 버스가 화재를 일으켜 교통에 영향.",
       "source": "Yahoo News Singapore",
       "url": "https://sg.news.yahoo.com/",
       "category": "sg",
       "categoryLabel": "싱가포르",
-      "time": "2026-03-30T09:00:00Z"
+      "time": "2026-03-30 03:01"
     },
     {
-      "title": "PM Wong: Singapore and ASEAN to Stay Neutral in Global Powers Rivalry",
-      "summary": "로렌스 웡 총리가 싱가포르와 아세안은 동서 지정학적 갈등에서 중립을 유지할 것이라고 발표했다.",
+      "title": "Singapore PM Wong reaffirms ASEAN's neutral stance amid geopolitical tensions",
+      "summary": "로렌스 웡 총리가 ASEAN은 개방적이고 포용적인 접근을 유지하며 편가르기 거부한다고 밝혔다.",
       "source": "Malay Mail",
       "url": "https://www.malaymail.com/news/singapore/2026/03/29/singapore-asean-to-stay-open-and-inclusive-will-not-choose-sides-says-pm-wong/214349",
       "category": "sg",
       "categoryLabel": "싱가포르",
-      "time": "2026-03-29T19:14:00Z"
+      "time": "2026-03-29 19:14"
     },
     {
-      "title": "US-Israel War on Iran Enters Day 30",
-      "summary": "미국-이스라엘의 이란 공습이 30일째 지속되며 글로벌 에너지 위기가 심화되고 있다.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/3/29/us-israel-war-on-iran-whats-happening-on-day-30-of-attacks",
+      "title": "Iran agrees to most US demands to end 30-day Middle East war",
+      "summary": "트럼프 대통령이 이란이 미국의 15개 요구사항 대부분에 동의했다며 전쟁 종료에 긍정적 신호를 보인다.",
+      "source": "CNN",
+      "url": "https://www.cnn.com/2026/03/29/world/live-news/iran-war-us-israel-trump",
       "category": "global",
       "categoryLabel": "글로벌",
-      "time": "2026-03-29T12:00:00Z"
+      "time": "2026-03-29 14:00"
     },
     {
-      "title": "ICAO Launches New Aviation Standards and Border Security System",
-      "summary": "국제민간항공기구가 새로운 항공소음 기준과 차세대 국경보안 시스템을 도입한다고 발표했다.",
+      "title": "New ICAO aviation standards mandate stricter environmental rules by 2029",
+      "summary": "ICAO가 항공기 소음과 CO2 배출을 줄이는 새로운 환경 기준을 2029년부터 적용한다고 발표했다.",
       "source": "Asian Aviation",
       "url": "https://asianaviation.com/icao-news-in-brief-30-march-2026/",
       "category": "global",
       "categoryLabel": "글로벌",
-      "time": "2026-03-30T05:00:00Z"
+      "time": "2026-03-30 20:00"
     },
     {
-      "title": "K-엔비디아 국민성장펀드 투자유치 경쟁 치열",
-      "summary": "리벨리온 등 AI 반도체 기업 대상 국민성장펀드 직접투자를 위해 사모펀드와 벤처캐피탈이 치열한 경쟁을 벌이고 있다.",
-      "source": "인베스트조선",
-      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/24/2026032480176.html",
+      "title": "어센트PE, 1300억원 첫 블라인드펀드 조성 완료 예정",
+      "summary": "신생 PE 어센트가 2026년 2월 목표 초과한 1300억원 규모 첫 펀드 조성을 마무리할 예정이다.",
+      "source": "brainconnect.ai",
+      "url": "https://brainconnect.ai/blog/korea-top5-pe-2025",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-03-24T08:00:00Z"
+      "time": "2026-02-12 09:00"
     },
     {
-      "title": "한국 스타트업 평균 투자액 증가, 거래건수는 감소",
-      "summary": "더브이씨 분석에 따르면 2025년 한국 스타트업의 평균 투자규모가 늘었지만 전체 투자건수는 줄어들었다고 발표했다.",
-      "source": "아시아경제",
-      "url": "https://cm.asiae.co.kr/en/article/alternative-investment/2026010209360325566",
+      "title": "딜로이트, 국내 사모펀드 ESG 책임투자 전환 촉구",
+      "summary": "딜로이트가 사모펀드 책임투자 전환을 위해 ESG를 투자 전 과정에 통합해야 한다고 강조했다.",
+      "source": "네이트뉴스",
+      "url": "https://news.nate.com/view/20260326n08233",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-01-02T09:00:00Z"
+      "time": "2026-03-26 08:00"
     },
     {
-      "title": "중소벤처부 2026년 예산 16.52조원 확정, 모태펀드는 축소",
-      "summary": "중소벤처부가 2026년 예산을 16.52조원으로 확정했으나 모태펀드는 당초 계획 대비 축소된 8200억원으로 편성됐다.",
-      "source": "KoreaTechDesk",
-      "url": "https://koreatechdesk.com/",
+      "title": "국내 스타트업 투자시장, 3월 마지막주 1427억원 규모 투자 유치",
+      "summary": "3월 23-27일 주간 19개 기업이 투자 유치에 나섰으며 12개 기업이 1427억원을 확보했다.",
+      "source": "스타트업레시피",
+      "url": "https://startuprecipe.co.kr/archives/5811352",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-01-15T10:00:00Z"
+      "time": "2026-03-27 16:30"
     },
     {
       "title": "Trump says US could ‘take the oil in Iran’",
