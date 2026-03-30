@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily News Brief</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; min-height: 100vh; }
+  .header { background: #1a1a2e; color: white; padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 20px; font-weight: 500; }
+  .header .meta { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .update-time { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .tabs { background: white; border-bottom: 0.5px solid #e0e0d8; padding: 0 32px; display: flex; }
+  .tab { padding: 14px 20px; font-size: 14px; cursor: pointer; border-bottom: 2px solid transparent; color: #888; transition: all 0.15s; white-space: nowrap; }
+  .tab.active { color: #1a1a2e; border-bottom-color: #1a1a2e; font-weight: 500; }
+  .tab:hover:not(.active) { color: #444; }
+  .content { max-width: 1100px; margin: 0 auto; padding: 28px 32px; }
+  .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 16px; }
+  .news-grid { display: grid; gap: 12px; }
+  .news-card { background: white; border-radius: 10px; border: 0.5px solid #e8e8e2; padding: 18px 20px; cursor: pointer; transition: border-color 0.15s; }
+  .news-card:hover { border-color: #bbb; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+  .card-title { font-size: 15px; font-weight: 500; line-height: 1.45; color: #1a1a1a; flex: 1; }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 500; flex-shrink: 0; }
+  .badge-sg { background: #e1f0fd; color: #1560a8; }
+  .badge-global { background: #e8f5e9; color: #2e7d32; }
+  .badge-alt { background: #fef3e2; color: #b45309; }
+  .card-summary { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 10px; }
+  .card-footer { display: flex; justify-content: space-between; align-items: center; }
+  .card-source { font-size: 12px; color: #999; }
+  .card-time { font-size: 12px; color: #bbb; }
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: white; border-radius: 10px; border: 0.5px solid #e8e8e2; padding: 16px 18px; }
+  .stat-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .stat-value { font-size: 22px; font-weight: 500; color: #1a1a2e; }
+  .stat-sub { font-size: 12px; color: #aaa; margin-top: 2px; }
+  .empty { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
+  .refresh-btn { background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.2); color: white; padding: 7px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; }
+  .refresh-btn:hover { background: rgba(255,255,255,0.2); }
+  .loading { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
+  .spinner { width: 28px; height: 28px; border: 2px solid #e0e0d8; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Daily News Brief</h1>
+    <div class="update-time" id="updateTime">로딩 중...</div>
+  </div>
+  <div style="display:flex; gap:12px; align-items:center;">
+    <div class="meta" id="sgTime">SGT --:--</div>
+    <button class="refresh-btn" onclick="loadNews()">새로고침</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="filterTab('all', this)">전체</div>
+  <div class="tab" onclick="filterTab('sg', this)">싱가포르</div>
+  <div class="tab" onclick="filterTab('global', this)">글로벌</div>
+  <div class="tab" onclick="filterTab('alt', this)">대체투자</div>
+</div>
+
+<div class="content">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">총 뉴스</div>
+      <div class="stat-value" id="totalCount">-</div>
+      <div class="stat-sub">오늘 수집</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">대체투자</div>
+      <div class="stat-value" id="altCount">-</div>
+      <div class="stat-sub">M&A / 바이아웃</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">다음 업데이트</div>
+      <div class="stat-value" id="nextUpdate">-</div>
+      <div class="stat-sub">SGT 기준</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="sectionLabel">오늘의 뉴스</div>
+  <div class="news-grid" id="newsGrid">
+    <div class="loading"><div class="spinner"></div>뉴스를 불러오는 중...</div>
+  </div>
+</div>
+
+<script>
+let allNews = [];
+let currentFilter = 'all';
+
+function getSGT() {
+  return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Singapore' }));
+}
+
+function updateClock() {
+  const sgt = getSGT();
+  const h = String(sgt.getHours()).padStart(2,'0');
+  const m = String(sgt.getMinutes()).padStart(2,'0');
+  document.getElementById('sgTime').textContent = `SGT ${h}:${m}`;
+  let diff = (7 * 60) - (sgt.getHours() * 60 + sgt.getMinutes());
+  if (diff < 0) diff += 1440;
+  document.getElementById('nextUpdate').textContent = `${Math.floor(diff/60)}h ${diff%60}m`;
+}
+
+function filterTab(type, el) {
+  currentFilter = type;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderNews();
+}
+
+function renderNews() {
+  const grid = document.getElementById('newsGrid');
+  const filtered = currentFilter === 'all' ? allNews : allNews.filter(n => n.category === currentFilter);
+  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌 뉴스', alt: '대체투자 뉴스' };
+  document.getElementById('sectionLabel').textContent = labels[currentFilter];
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="empty">해당 카테고리 뉴스가 없습니다.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(n => `
+    <div class="news-card" onclick="window.open('${n.url}', '_blank')">
+      <div class="card-top">
+        <div class="card-title">${n.title}</div>
+        <span class="badge badge-${n.category}">${n.categoryLabel}</span>
+      </div>
+      <div class="card-summary">${n.summary}</div>
+      <div class="card-footer">
+        <span class="card-source">${n.source}</span>
+        <span class="card-time">${n.time}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadNews() {
+  document.getElementById('newsGrid').innerHTML = '<div class="loading"><div class="spinner"></div>뉴스를 불러오는 중...</div>';
+
+  try {
+    const res = await fetch('./news_data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('아직 뉴스 데이터가 없습니다');
+    const data = await res.json();
+
+    allNews = data.news || [];
+    document.getElementById('totalCount').textContent = allNews.length;
+    document.getElementById('altCount').textContent = allNews.filter(n => n.category === 'alt').length;
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated_at_display}`;
+    renderNews();
+
+  } catch (e) {
+    document.getElementById('newsGrid').innerHTML = `
+      <div class="empty">
+        ${e.message}<br><br>
+        GitHub Actions 탭에서 워크플로우를 수동으로 실행해주세요.<br><br>
+        <button onclick="loadNews()" style="padding:8px 20px; cursor:pointer; border-radius:6px; border:1px solid #ddd;">다시 시도</button>
+      </div>`;
+  }
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+loadNews();
+</script>
+</body>
+</html>
