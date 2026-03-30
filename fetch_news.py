@@ -1,9 +1,11 @@
 import anthropic
 import json
+import os
 from datetime import datetime
 import pytz
 
-client = anthropic.Anthropic()
+client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
 sgt = pytz.timezone('Asia/Singapore')
 today = datetime.now(sgt).strftime('%Y년 %m월 %d일')
 
@@ -22,7 +24,6 @@ Return ONLY valid JSON array. No markdown, no explanation.""",
     messages=[{"role": "user", "content": f"{today} 최신 뉴스 JSON 배열로 반환해주세요."}]
 )
 
-# 텍스트 블록 추출
 text = next((b.text for b in response.content if b.type == "text"), "[]")
 text = text.strip().replace("```json", "").replace("```", "").strip()
 start, end = text.find('['), text.rfind(']')
