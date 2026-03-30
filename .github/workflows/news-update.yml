@@ -9,6 +9,14 @@ on:
     - cron: '0 7 * * 1-5'    # 15:00 SGT (월-금)
     - cron: '0 9 * * 1-5'    # 17:00 SGT (월-금)
     - cron: '0 14 * * 1-5'   # 22:00 SGT (월-금)
+    - cron: '0 10 * * 6'     # 18:00 SGT (토)
+    - cron: '0 12 * * 6'     # 20:00 SGT (토)
+    - cron: '0 14 * * 6'     # 22:00 SGT (토)
+    - cron: '0 16 * * 6'     # 00:00 SGT (일)
+    - cron: '0 18 * * 6'     # 02:00 SGT (일)
+    - cron: '0 20 * * 6'     # 04:00 SGT (일)
+    - cron: '0 22 * * 6'     # 06:00 SGT (일)
+    - cron: '0 0 * * 0'      # 08:00 SGT (일)
   workflow_dispatch:
 
 permissions:
