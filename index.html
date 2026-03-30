@@ -41,6 +41,19 @@
   .loading { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
   .spinner { width: 28px; height: 28px; border: 2px solid #e0e0d8; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
   @keyframes spin { to { transform: rotate(360deg); } }
+  .commodity-section { margin-top: 40px; }
+  .commodity-header { background: #1a2e1a; color: white; padding: 14px 20px; border-radius: 10px 10px 0 0; font-size: 14px; font-weight: 500; display: flex; justify-content: space-between; }
+  .commodity-card { background: white; border: 0.5px solid #e8e8e2; border-top: none; padding: 16px 20px; cursor: pointer; transition: border-color 0.15s; }
+  .commodity-card:last-child { border-radius: 0 0 10px 10px; }
+  .commodity-card:hover { background: #fafaf8; }
+  .commodity-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+  .commodity-title { font-size: 14px; font-weight: 500; line-height: 1.4; flex: 1; }
+  .commodity-badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 500; background: #e8f5e9; color: #2e7d32; flex-shrink: 0; }
+  .price-up { background: #ffeaea; color: #c0392b; }
+  .price-down { background: #e8f5e9; color: #2e7d32; }
+  .price-mixed { background: #fef3e2; color: #b45309; }
+  .commodity-summary { font-size: 12px; color: #666; line-height: 1.5; }
+  .commodity-footer { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #aaa; }
 </style>
 </head>
 <body>
@@ -85,6 +98,14 @@
   <div class="section-label" id="sectionLabel">오늘의 뉴스</div>
   <div class="news-grid" id="newsGrid">
     <div class="loading"><div class="spinner"></div>뉴스를 불러오는 중...</div>
+  </div>
+
+  <div class="commodity-section" id="commoditySection" style="display:none;">
+    <div class="commodity-header">
+      <span>Weekly Commodity Update</span>
+      <span id="commodityUpdated" style="font-size:12px; opacity:0.6;"></span>
+    </div>
+    <div id="commodityGrid"></div>
   </div>
 </div>
 
@@ -152,6 +173,27 @@ async function loadNews() {
     document.getElementById('altCount').textContent = allNews.filter(n => n.category === 'alt').length;
     document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated_at_display}`;
     renderNews();
+
+    // 커머디티 뉴스
+    if (data.commodity_news && data.commodity_news.length > 0) {
+      document.getElementById('commoditySection').style.display = 'block';
+      document.getElementById('commodityUpdated').textContent = data.commodity_updated_display || '';
+      const priceClass = { up: 'price-up', down: 'price-down', mixed: 'price-mixed' };
+      const priceLabel = { up: '▲ Up', down: '▼ Down', mixed: '◆ Mixed' };
+      document.getElementById('commodityGrid').innerHTML = data.commodity_news.map(n => `
+        <div class="commodity-card" onclick="window.open('${n.url}', '_blank')">
+          <div class="commodity-top">
+            <div class="commodity-title">${n.title}</div>
+            <span class="commodity-badge ${priceClass[n.price_impact] || ''}">${n.commodity}</span>
+          </div>
+          <div class="commodity-summary">${n.summary}</div>
+          <div class="commodity-footer">
+            <span>${n.source}</span>
+            <span>${priceLabel[n.price_impact] || ''} · ${n.time}</span>
+          </div>
+        </div>
+      `).join('');
+    }
 
   } catch (e) {
     document.getElementById('newsGrid').innerHTML = `
