@@ -18,7 +18,7 @@ Each item: { title, summary (1 sentence in Korean), source, url, category (sg|gl
 Find:
 - 1 Singapore local news
 - 1 Global news
-- 3 Korean alternative investment news (M&A, buyout, private equity) from dealsite.co.kr, etnews.com, investchosun.com
+- 3 Korean alternative investment & PE/VC related news covering any of the following topics: 대체투자, 사모펀드(PEF), 바이아웃, 스타트업 투자, VC 딜, PE 딜, M&A, 인수합병, 업계동향, 정부/금융당국 정책 (FSC, FSS, KVCA 등), 펀드 결성, LP/GP 동향, 블라인드펀드, 세컨더리, 크레딧펀드 등. Search broadly across any Korean financial/business news sources including dealsite.co.kr, etnews.com, investchosun.com, hankyung.com, mk.co.kr, sedaily.com, bloter.net, thevc.kr, platum.kr, venturesquare.net or any other relevant Korean news sites
 Return ONLY valid JSON array. No markdown, no explanation.""",
     messages=[{"role": "user", "content": f"{today} 최신 뉴스 5개를 JSON 배열로 반환해주세요."}]
 )
