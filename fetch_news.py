@@ -37,27 +37,33 @@ RSS_FEEDS = {
     "global_econ": [
         ("https://www.ft.com/rss/home", "FT"),
         ("https://feeds.reuters.com/reuters/businessNews", "Reuters Business"),
-        ("https://feeds.bloomberg.com/economics/news.rss", "Bloomberg Economics"),
+        ("https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml", "NYT Economy"),
     ],
     "us_politics": [
-        ("https://feeds.reuters.com/Reuters/PoliticsNews", "Reuters Politics"),
         ("https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", "NYT Politics"),
-        ("https://www.politico.com/rss/politicopicks.xml", "Politico"),
+        ("https://feeds.washingtonpost.com/rss/politics", "Washington Post"),
+        ("https://rss.nytimes.com/services/xml/rss/nyt/US.xml", "NYT US"),
     ],
     "kr_econ": [
         ("https://www.hankyung.com/feed/finance", "한국경제"),
         ("https://www.mk.co.kr/rss/30100041/", "매일경제"),
-        ("https://www.sedaily.com/RSS/Rss.xml", "서울경제"),
         ("https://platum.kr/feed", "플래텀"),
-        ("https://www.bloter.net/feed", "블로터"),
-        ("https://www.etoday.co.kr/news/rss/finance.xml", "이투데이"),
-    ],
+        ("https://www.etnews.com/rss/allArticleList.xml", "전자신문"),
+        ("https://www.zdnet.co.kr/rss/news/", "ZDNet Korea"),
+    ]
 }
 
 def fetch_rss(url, source, max_items=5):
     try:
         res = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-        root = ET.fromstring(res.content)
+        # XML 파싱 오류 대비 — 인코딩 정리
+        content = res.content.replace(b'\x00', b'')
+        try:
+            root = ET.fromstring(content)
+        except ET.ParseError:
+            # lxml 없이 간단히 재시도 — utf-8 강제
+            content = res.text.encode('utf-8', errors='ignore')
+            root = ET.fromstring(content)
         items = []
         for item in root.findall(".//item")[:max_items]:
             title = item.findtext("title", "").strip()
@@ -93,10 +99,17 @@ Each item: {{ title (original language), summary (1 sentence in Korean, max 30 w
 Return ONLY valid JSON array. No markdown. No explanation.""",
         messages=[{"role": "user", "content": f"Today: {today}\nCandidates:\n{json.dumps(candidates, ensure_ascii=False)}"}]
     )
-    text = next((b.text for b in response.content if b.type == "text"), "[]")
+    text = next((b.text for b in response.content if b.type == "text"), "")
+    if not text.strip():
+        print("⚠️ Claude 응답 없음 - 후보 뉴스 그대로 사용")
+        return []
     text = text.strip().replace("```json", "").replace("```", "").strip()
     s, e = text.find('['), text.rfind(']')
-    return json.loads(text[s:e+1]) if s != -1 else []
+    try:
+        return json.loads(text[s:e+1]) if s != -1 else []
+    except Exception as ex:
+        print(f"⚠️ JSON 파싱 오류: {ex}")
+        return []
 
 def fetch_kr_deal_news():
     """딜사이트, 투자조선, thevc 웹검색으로 각 1개"""
