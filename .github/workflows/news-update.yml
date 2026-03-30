@@ -2,11 +2,13 @@ name: Daily News Update
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # 매일 23:00 UTC = 07:00 SGT
-  workflow_dispatch:        # 수동 실행도 가능
+    - cron: '30 23 * * *'  # 07:30 SGT
+    - cron: '0 4 * * *'    # 12:00 SGT
+    - cron: '0 9 * * *'    # 17:00 SGT
+  workflow_dispatch:
 
 permissions:
-  contents: write           # push 권한 추가
+  contents: write
 
 jobs:
   fetch-news:
