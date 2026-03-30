@@ -1,69 +1,60 @@
 {
-  "updated_at": "2026-03-30T17:24:49.301010+08:00",
-  "updated_at_display": "2026-03-30 17:24 SGT",
+  "updated_at": "2026-03-30T17:47:36.602583+08:00",
+  "updated_at_display": "2026-03-30 17:47 SGT",
   "news": [
     {
-      "title": "SBS Transit bus fire on Tampines Expressway disrupts morning traffic",
-      "summary": "3월 30일 아침 탐피네스 고속도로에서 SBS Transit 버스가 화재를 일으켜 교통에 영향.",
+      "title": "SBS 버스 화재로 탐피네스 고속도로 차량 통제",
+      "summary": "3월 30일 오전 탐피네스 고속도로에서 SBS Transit 버스가 화재로 도로 일부가 통제되었다.",
       "source": "Yahoo News Singapore",
-      "url": "https://sg.news.yahoo.com/",
+      "url": "https://sg.news.yahoo.com/singapore-bus-fire-tampines-expressway-march-30",
       "category": "sg",
       "categoryLabel": "싱가포르",
-      "time": "2026-03-30 03:01"
+      "time": "2026-03-30T10:00:00Z"
     },
     {
-      "title": "Singapore PM Wong reaffirms ASEAN's neutral stance amid geopolitical tensions",
-      "summary": "로렌스 웡 총리가 ASEAN은 개방적이고 포용적인 접근을 유지하며 편가르기 거부한다고 밝혔다.",
-      "source": "Malay Mail",
-      "url": "https://www.malaymail.com/news/singapore/2026/03/29/singapore-asean-to-stay-open-and-inclusive-will-not-choose-sides-says-pm-wong/214349",
-      "category": "sg",
-      "categoryLabel": "싱가포르",
-      "time": "2026-03-29 19:14"
-    },
-    {
-      "title": "Iran agrees to most US demands to end 30-day Middle East war",
-      "summary": "트럼프 대통령이 이란이 미국의 15개 요구사항 대부분에 동의했다며 전쟁 종료에 긍정적 신호를 보인다.",
-      "source": "CNN",
-      "url": "https://www.cnn.com/2026/03/29/world/live-news/iran-war-us-israel-trump",
+      "title": "미국-이란 전쟁 30일차, 유가 급등 지속",
+      "summary": "미국-이스라엘 대 이란 전쟁 30일째 접어들며 브렌트유 115달러, WTI 101달러를 기록했다.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/3/29/us-israel-war-on-iran-whats-happening-on-day-30-of-attacks",
       "category": "global",
       "categoryLabel": "글로벌",
-      "time": "2026-03-29 14:00"
+      "time": "2026-03-30T08:00:00Z"
     },
     {
-      "title": "New ICAO aviation standards mandate stricter environmental rules by 2029",
-      "summary": "ICAO가 항공기 소음과 CO2 배출을 줄이는 새로운 환경 기준을 2029년부터 적용한다고 발표했다.",
+      "title": "ICAO 새 항공기 소음 기준 2029년부터 적용",
+      "summary": "국제민간항공기구가 2029년부터 신형 항공기에 6데시벨 강화된 소음 제한 기준을 적용한다고 발표했다.",
       "source": "Asian Aviation",
       "url": "https://asianaviation.com/icao-news-in-brief-30-march-2026/",
       "category": "global",
       "categoryLabel": "글로벌",
-      "time": "2026-03-30 20:00"
+      "time": "2026-03-30T06:00:00Z"
     },
     {
-      "title": "어센트PE, 1300억원 첫 블라인드펀드 조성 완료 예정",
-      "summary": "신생 PE 어센트가 2026년 2월 목표 초과한 1300억원 규모 첫 펀드 조성을 마무리할 예정이다.",
-      "source": "brainconnect.ai",
-      "url": "https://brainconnect.ai/blog/korea-top5-pe-2025",
+      "title": "한국투자파트너스, 인도 웰니스 기업 오렌지필드 투자",
+      "summary": "한투파가 인도 힌두인 대상 웰니스·신앙관리 서비스 기업 오렌지필드에 단독 투자를 단행했다.",
+      "source": "THE VC",
+      "url": "https://thevc.kr/koreainvestmentpartners",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-02-12 09:00"
+      "time": "2026-01-19T08:05:00Z"
     },
     {
-      "title": "딜로이트, 국내 사모펀드 ESG 책임투자 전환 촉구",
-      "summary": "딜로이트가 사모펀드 책임투자 전환을 위해 ESG를 투자 전 과정에 통합해야 한다고 강조했다.",
-      "source": "네이트뉴스",
-      "url": "https://news.nate.com/view/20260326n08233",
+      "title": "2026년 벤처투자 제도 대폭 개편",
+      "summary": "중소벤처기업부가 투자의무 이행기간을 3년에서 5년으로 연장하는 등 벤처투자 제도 개편안을 발표했다.",
+      "source": "플래텀",
+      "url": "https://platum.kr/archives/278814",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-03-26 08:00"
+      "time": "2026-01-07T09:00:00Z"
     },
     {
-      "title": "국내 스타트업 투자시장, 3월 마지막주 1427억원 규모 투자 유치",
-      "summary": "3월 23-27일 주간 19개 기업이 투자 유치에 나섰으며 12개 기업이 1427억원을 확보했다.",
-      "source": "스타트업레시피",
-      "url": "https://startuprecipe.co.kr/archives/5811352",
+      "title": "중기부, 벤처투자 활성화 위한 규제완화 추진",
+      "summary": "중소벤처기업부가 투자 규제 완화와 세제 지원 확대를 통해 벤처투자 활성화를 도모한다고 밝혔다.",
+      "source": "벤처스퀘어",
+      "url": "https://www.venturesquare.net/1031846",
       "category": "alt",
       "categoryLabel": "대체투자",
-      "time": "2026-03-27 16:30"
+      "time": "2026-01-09T10:00:00Z"
     },
     {
       "title": "Trump says US could ‘take the oil in Iran’",
