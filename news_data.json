@@ -1,87 +1,33 @@
 {
-  "updated_at": "2026-03-30T17:47:36.602583+08:00",
-  "updated_at_display": "2026-03-30 17:47 SGT",
+  "updated_at": "2026-03-31T07:45:05.298306+08:00",
+  "updated_at_display": "2026-03-31 07:45 SGT",
   "news": [
     {
-      "title": "SBS 버스 화재로 탐피네스 고속도로 차량 통제",
-      "summary": "3월 30일 오전 탐피네스 고속도로에서 SBS Transit 버스가 화재로 도로 일부가 통제되었다.",
-      "source": "Yahoo News Singapore",
-      "url": "https://sg.news.yahoo.com/singapore-bus-fire-tampines-expressway-march-30",
-      "category": "sg",
-      "categoryLabel": "싱가포르",
-      "time": "2026-03-30T10:00:00Z"
-    },
-    {
-      "title": "미국-이란 전쟁 30일차, 유가 급등 지속",
-      "summary": "미국-이스라엘 대 이란 전쟁 30일째 접어들며 브렌트유 115달러, WTI 101달러를 기록했다.",
-      "source": "Al Jazeera",
-      "url": "https://www.aljazeera.com/news/2026/3/29/us-israel-war-on-iran-whats-happening-on-day-30-of-attacks",
-      "category": "global",
-      "categoryLabel": "글로벌",
-      "time": "2026-03-30T08:00:00Z"
-    },
-    {
-      "title": "ICAO 새 항공기 소음 기준 2029년부터 적용",
-      "summary": "국제민간항공기구가 2029년부터 신형 항공기에 6데시벨 강화된 소음 제한 기준을 적용한다고 발표했다.",
-      "source": "Asian Aviation",
-      "url": "https://asianaviation.com/icao-news-in-brief-30-march-2026/",
-      "category": "global",
-      "categoryLabel": "글로벌",
-      "time": "2026-03-30T06:00:00Z"
-    },
-    {
-      "title": "한국투자파트너스, 인도 웰니스 기업 오렌지필드 투자",
-      "summary": "한투파가 인도 힌두인 대상 웰니스·신앙관리 서비스 기업 오렌지필드에 단독 투자를 단행했다.",
-      "source": "THE VC",
-      "url": "https://thevc.kr/koreainvestmentpartners",
+      "title": "삼성웰스토리, M&A 격변기 속 흔들리는 독주 체제",
+      "summary": "한화 아워홈이 신세계푸드 급식사업부 인수로 삼성웰스토리 독주 체제에 도전",
+      "source": "dealsite.co.kr",
+      "url": "https://dealsiteplus.co.kr/articles/157932",
       "category": "alt",
-      "categoryLabel": "대체투자",
-      "time": "2026-01-19T08:05:00Z"
+      "categoryLabel": "한국딜",
+      "time": "2026-03-03"
     },
     {
-      "title": "2026년 벤처투자 제도 대폭 개편",
-      "summary": "중소벤처기업부가 투자의무 이행기간을 3년에서 5년으로 연장하는 등 벤처투자 제도 개편안을 발표했다.",
-      "source": "플래텀",
-      "url": "https://platum.kr/archives/278814",
+      "title": "'K-엔비디아'로 불붙은 국민성장펀드 투자 유치…PEF도 물밑경쟁",
+      "summary": "국민성장펀드 투자 유치를 두고 PEF들이 치열한 경쟁을 벌이고 있다",
+      "source": "investchosun.com",
+      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/24/2026032480176.html",
       "category": "alt",
-      "categoryLabel": "대체투자",
-      "time": "2026-01-07T09:00:00Z"
+      "categoryLabel": "한국딜",
+      "time": "2026-03-24"
     },
     {
-      "title": "중기부, 벤처투자 활성화 위한 규제완화 추진",
-      "summary": "중소벤처기업부가 투자 규제 완화와 세제 지원 확대를 통해 벤처투자 활성화를 도모한다고 밝혔다.",
-      "source": "벤처스퀘어",
-      "url": "https://www.venturesquare.net/1031846",
+      "title": "2026년 3월 한국 스타트업 투자 1조원 돌파, 바이오/의료 분야 36건 투자",
+      "summary": "3월 총 228건 투자로 1조원 돌파, 바이오의료 분야가 36건으로 최다",
+      "source": "thevc.kr",
+      "url": "https://thevc.kr/",
       "category": "alt",
-      "categoryLabel": "대체투자",
-      "time": "2026-01-09T10:00:00Z"
-    },
-    {
-      "title": "Trump says US could ‘take the oil in Iran’",
-      "summary": "US president tells the FT he is considering seizing strategic Kharg Island even as negotiations cont...",
-      "source": "FT",
-      "url": "https://www.ft.com/content/3bd9fb6c-2985-4d24-b86b-23b7884031f5",
-      "category": "global",
-      "categoryLabel": "글로벌",
-      "time": "FT"
-    },
-    {
-      "title": "Oil rises to $116 as Trump stokes fears of protracted conflict",
-      "summary": "Traders weigh signs of escalating conflict as more US troops arrive in region and Yemen enters war",
-      "source": "FT",
-      "url": "https://www.ft.com/content/dcf55026-1c12-4643-84c2-d68f86b012eb",
-      "category": "global",
-      "categoryLabel": "글로벌",
-      "time": "FT"
-    },
-    {
-      "title": "TotalEnergies made bumper profit on Middle East oil bet",
-      "summary": "Fewer contracts increased volatility and made it possible for a single trader to dominate the market",
-      "source": "FT",
-      "url": "https://www.ft.com/content/eba87bd4-7e55-4a7b-b14c-71bf486bfd31",
-      "category": "global",
-      "categoryLabel": "글로벌",
-      "time": "FT"
+      "categoryLabel": "한국딜",
+      "time": "2026-03-30"
     }
   ]
 }
