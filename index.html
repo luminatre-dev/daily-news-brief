@@ -26,6 +26,7 @@
   .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 500; flex-shrink: 0; }
   .badge-sg { background: #e1f0fd; color: #1560a8; }
   .badge-global { background: #e8f5e9; color: #2e7d32; }
+  .badge-us { background: #fce8e8; color: #c0392b; }
   .badge-alt { background: #fef3e2; color: #b45309; }
   .card-summary { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 10px; }
   .card-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -72,8 +73,9 @@
 
 <div class="tabs">
   <div class="tab active" onclick="filterTab('all', this)">전체</div>
-  <div class="tab" onclick="filterTab('global', this)">글로벌</div>
-  <div class="tab" onclick="filterTab('alt', this)">대체투자</div>
+  <div class="tab" onclick="filterTab('global', this)">글로벌경제</div>
+  <div class="tab" onclick="filterTab('us', this)">미국정치</div>
+  <div class="tab" onclick="filterTab('alt', this)">한국경제</div>
   <div class="tab" onclick="filterTab('sg', this)">싱가포르</div>
 </div>
 
@@ -150,7 +152,7 @@ function filterTab(type, el) {
 function renderNews() {
   const grid = document.getElementById('newsGrid');
   const filtered = currentFilter === 'all' ? allNews : allNews.filter(n => n.category === currentFilter);
-  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌 뉴스', alt: '대체투자 뉴스' };
+  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌 경제', us: '미국 정치', alt: '한국 경제/딜' };
   document.getElementById('sectionLabel').textContent = labels[currentFilter];
 
   if (!filtered.length) {
