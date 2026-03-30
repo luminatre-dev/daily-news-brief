@@ -11,17 +11,16 @@ today = datetime.now(sgt).strftime('%Y년 %m월 %d일')
 
 response = client.messages.create(
     model="claude-sonnet-4-20250514",
-    max_tokens=2000,
+    max_tokens=1000,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
-    system="""You are a news aggregator. Search for today's latest news and return ONLY a JSON array.
-Each item: { title, summary (2 sentences in Korean), source, url, category (sg|global|alt), categoryLabel (싱가포르|글로벌|대체투자), time }
+    system="""You are a news aggregator. Return ONLY a JSON array with exactly 5 news items.
+Each item: { title, summary (1 sentence in Korean), source, url, category (sg|global|alt), categoryLabel (싱가포르|글로벌|대체투자), time }
 Find:
-- 3 Singapore local news (straitstimes.com, channelnewsasia.com 등)
-- 3 Global international news
-- 4 Korean alternative investment news: M&A, buyout, private equity
-  from dealsite.co.kr, etnews.com, investchosun.com
+- 1 Singapore local news
+- 1 Global news
+- 3 Korean alternative investment news (M&A, buyout, private equity) from dealsite.co.kr, etnews.com, investchosun.com
 Return ONLY valid JSON array. No markdown, no explanation.""",
-    messages=[{"role": "user", "content": f"{today} 최신 뉴스 JSON 배열로 반환해주세요."}]
+    messages=[{"role": "user", "content": f"{today} 최신 뉴스 5개를 JSON 배열로 반환해주세요."}]
 )
 
 text = next((b.text for b in response.content if b.type == "text"), "[]")
