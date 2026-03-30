@@ -19,7 +19,8 @@
   .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 16px; }
   .news-grid { display: grid; gap: 12px; }
   .news-card { background: white; border-radius: 10px; border: 0.5px solid #e8e8e2; padding: 18px 20px; cursor: pointer; transition: border-color 0.15s; }
-  .news-card:hover { border-color: #bbb; }
+  .news-card.is-read { opacity: 0.4; }
+  .news-card.is-read .card-title { text-decoration: line-through; }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
   .card-title { font-size: 15px; font-weight: 500; line-height: 1.45; color: #1a1a1a; flex: 1; }
   .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; font-weight: 500; flex-shrink: 0; }
@@ -112,6 +113,18 @@
 <script>
 let allNews = [];
 let currentFilter = 'all';
+const READ_KEY = 'readNews';
+
+function getReadUrls() {
+  try { return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+
+function markRead(url) {
+  const read = getReadUrls();
+  read.add(url);
+  localStorage.setItem(READ_KEY, JSON.stringify([...read]));
+}
 
 function getSGT() {
   return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Singapore' }));
@@ -145,8 +158,15 @@ function renderNews() {
     return;
   }
 
-  grid.innerHTML = filtered.map(n => `
-    <div class="news-card" onclick="window.open('${n.url}', '_blank')">
+  const read = getReadUrls();
+  const unread = filtered.filter(n => !read.has(n.url));
+  const readItems = filtered.filter(n => read.has(n.url));
+  const sorted = [...unread, ...readItems];
+
+  grid.innerHTML = sorted.map(n => {
+    const isRead = read.has(n.url);
+    return `
+    <div class="news-card ${isRead ? 'is-read' : ''}" onclick="handleCardClick(this, '${n.url}')">
       <div class="card-top">
         <div class="card-title">${n.title}</div>
         <span class="badge badge-${n.category}">${n.categoryLabel}</span>
@@ -156,8 +176,17 @@ function renderNews() {
         <span class="card-source">${n.source}</span>
         <span class="card-time">${n.time}</span>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
+}
+
+function handleCardClick(el, url) {
+  markRead(url);
+  el.classList.add('is-read');
+  // 맨 아래로 이동
+  const grid = document.getElementById('newsGrid');
+  grid.appendChild(el);
+  window.open(url, '_blank');
 }
 
 async function loadNews() {
