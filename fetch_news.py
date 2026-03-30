@@ -58,18 +58,30 @@ def fetch_ft_news(max_items=3):
 
 # 평일 뉴스 수집
 def fetch_weekday_news():
-    response = client.messages.create(
+    # 기존 수집된 URL 로드 (중복 제거용)
+existing_news_urls = set()
+try:
+    with open("news_data.json", "r", encoding="utf-8") as f:
+        existing = json.load(f)
+        for n in existing.get("news", []):
+            if n.get("url"):
+                existing_news_urls.add(n["url"])
+except:
+    pass
+
+
         model="claude-sonnet-4-20250514",
         max_tokens=1500,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        system="""You are a news aggregator. Return ONLY a JSON array with exactly 7 news items.
+        system="""You are a news aggregator. Return ONLY a JSON array with exactly 6 news items.
 Each item: { title, summary (1 sentence in Korean, max 30 words), source, url, category (sg|global|alt), categoryLabel (싱가포르|글로벌|대체투자), time }
 Find:
-- 2 Singapore local news
+- 1 Singapore local news
 - 2 Global news
 - 3 Korean alternative investment & PE/VC related news covering: 대체투자, 사모펀드(PEF), 바이아웃, 스타트업 투자, VC 딜, PE 딜, M&A, 인수합병, 업계동향, 정부/금융당국 정책, 펀드 결성, LP/GP 동향 etc. Search broadly across dealsite.co.kr, etnews.com, investchosun.com, hankyung.com, mk.co.kr, sedaily.com, bloter.net, thevc.kr, platum.kr, venturesquare.net or any other relevant Korean news sites
+Exclude these already collected URLs: {list(existing_news_urls)[:30]}
 Return ONLY valid JSON array. No markdown, no explanation.""",
-        messages=[{"role": "user", "content": f"{today} 최신 뉴스 7개를 JSON 배열로 반환해주세요."}]
+        messages=[{"role": "user", "content": f"{today} 최신 뉴스 6개를 JSON 배열로 반환해주세요."}]
     )
     text = next((b.text for b in response.content if b.type == "text"), "[]")
     text = text.strip().replace("```json", "").replace("```", "").strip()
@@ -86,6 +98,9 @@ def fetch_commodity_news():
     date_range = f"{monday.strftime('%Y-%m-%d')} 00:00 SGT ~ {now.strftime('%Y-%m-%d %H:%M')} SGT"
 
     response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1500,
+    tools=[{"type": "web_search_20250305", "name": "web_search"}],
         model="claude-sonnet-4-20250514",
         max_tokens=1500,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
