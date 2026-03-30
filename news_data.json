@@ -1,0 +1,51 @@
+{
+  "updated_at": "2026-03-30T16:43:53.964659+08:00",
+  "updated_at_display": "2026-03-30 16:43 SGT",
+  "news": [
+    {
+      "title": "SBS Transit Bus Fire on Tampines Expressway",
+      "summary": "SBS 트랜짓 버스가 탐피네스 고속도로에서 화재가 발생하여 교통 통제가 이뤄졌습니다.",
+      "source": "Yahoo News Singapore",
+      "url": "https://sg.news.yahoo.com/",
+      "category": "sg",
+      "categoryLabel": "싱가포르",
+      "time": "2026-03-30T10:30:00Z"
+    },
+    {
+      "title": "US-Israel War on Iran Escalates - Day 30",
+      "summary": "미국-이스라엘의 이란 전쟁이 30일째 계속되면서 테헤란에서 강력한 폭발이 발생하고 글로벌 에너지 위기가 악화되고 있습니다.",
+      "source": "Al Jazeera",
+      "url": "https://www.aljazeera.com/news/2026/3/29/us-israel-war-on-iran-whats-happening-on-day-30-of-attacks",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "2026-03-30T08:00:00Z"
+    },
+    {
+      "title": "MBK Partners Sells Golfzon County",
+      "summary": "MBK파트너스가 골프존카운티 매각 절차에 들어가며 모건스탠리와 삼정KPMG가 매각 주관사로 선정되었습니다.",
+      "source": "InvestChosun",
+      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/25/2026032580218.html",
+      "category": "alt",
+      "categoryLabel": "대체투자",
+      "time": "2026-03-25T09:00:00Z"
+    },
+    {
+      "title": "K-NVIDIA National Growth Fund Competition",
+      "summary": "'K-엔비디아'로 불리는 리벨리온에 대한 국민성장펀드 투자 유치 경쟁이 치열해지며 사모펀드들의 물밑 작업이 활발합니다.",
+      "source": "InvestChosun",
+      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/24/2026032480176.html",
+      "category": "alt",
+      "categoryLabel": "대체투자",
+      "time": "2026-03-24T10:30:00Z"
+    },
+    {
+      "title": "Private Equity Fund Regulation Strengthened",
+      "summary": "금융위원회가 기관전용 사모펀드 규율을 강화하며 '원스트라이크 아웃' 제도 도입과 GP 보고 의무를 신설했습니다.",
+      "source": "DealSite",
+      "url": "https://dealsite.co.kr/categories/075000",
+      "category": "alt",
+      "categoryLabel": "대체투자",
+      "time": "2026-03-22T14:00:00Z"
+    }
+  ]
+}
