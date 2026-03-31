@@ -73,9 +73,8 @@
 
 <div class="tabs">
   <div class="tab active" onclick="filterTab('all', this)">전체</div>
-  <div class="tab" onclick="filterTab('global', this)">글로벌경제</div>
-  <div class="tab" onclick="filterTab('us', this)">미국정치</div>
-  <div class="tab" onclick="filterTab('alt', this)">한국경제</div>
+  <div class="tab" onclick="filterTab('global', this)">글로벌</div>
+  <div class="tab" onclick="filterTab('alt', this)">대체투자</div>
   <div class="tab" onclick="filterTab('sg', this)">싱가포르</div>
 </div>
 
@@ -152,7 +151,7 @@ function filterTab(type, el) {
 function renderNews() {
   const grid = document.getElementById('newsGrid');
   const filtered = currentFilter === 'all' ? allNews : allNews.filter(n => n.category === currentFilter);
-  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌 경제', us: '미국 정치', alt: '한국 경제/딜' };
+  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌', alt: '대체투자' };
   document.getElementById('sectionLabel').textContent = labels[currentFilter];
 
   if (!filtered.length) {
