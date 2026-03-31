@@ -1,33 +1,24 @@
 {
-  "updated_at": "2026-03-31T07:45:05.298306+08:00",
-  "updated_at_display": "2026-03-31 07:45 SGT",
+  "updated_at": "2026-03-31T08:04:21.195861+08:00",
+  "updated_at_display": "2026-03-31 08:04 SGT",
   "news": [
     {
-      "title": "삼성웰스토리, M&A 격변기 속 흔들리는 독주 체제",
-      "summary": "한화 아워홈이 신세계푸드 급식사업부 인수로 삼성웰스토리 독주 체제에 도전",
-      "source": "dealsite.co.kr",
-      "url": "https://dealsiteplus.co.kr/articles/157932",
+      "title": "엠벤처투자, 한국금거래소 인수 '속도'…바인딩 MOU",
+      "summary": "엠벤처투자가 한국금거래소 경영권 지분 인수에 구속력 있는 양해각서를 맺고 실사를 마무리하고 있다.",
+      "source": "딜사이트",
+      "url": "https://dealsite.co.kr/articles/133488",
       "category": "alt",
       "categoryLabel": "한국딜",
-      "time": "2026-03-03"
+      "time": "2024-12-17"
     },
     {
-      "title": "'K-엔비디아'로 불붙은 국민성장펀드 투자 유치…PEF도 물밑경쟁",
-      "summary": "국민성장펀드 투자 유치를 두고 PEF들이 치열한 경쟁을 벌이고 있다",
-      "source": "investchosun.com",
-      "url": "https://www.investchosun.com/site/data/html_dir/2026/03/24/2026032480176.html",
+      "title": "2025 초기 단계 스타트업 투자 동향",
+      "summary": "업력 3년 이내 초기 스타트업 투자유치가 749개에서 327개로 반토막 나며 투자 비중이 급감했다.",
+      "source": "더브이씨",
+      "url": "https://thevc.kr/discussions/korea_startup_funding_25_seed",
       "category": "alt",
       "categoryLabel": "한국딜",
-      "time": "2026-03-24"
-    },
-    {
-      "title": "2026년 3월 한국 스타트업 투자 1조원 돌파, 바이오/의료 분야 36건 투자",
-      "summary": "3월 총 228건 투자로 1조원 돌파, 바이오의료 분야가 36건으로 최다",
-      "source": "thevc.kr",
-      "url": "https://thevc.kr/",
-      "category": "alt",
-      "categoryLabel": "한국딜",
-      "time": "2026-03-30"
+      "time": "2025-12-28"
     }
   ]
 }
