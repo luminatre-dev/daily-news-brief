@@ -72,10 +72,7 @@
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="filterTab('all', this)">전체</div>
-  <div class="tab" onclick="filterTab('global', this)">글로벌</div>
-  <div class="tab" onclick="filterTab('alt', this)">대체투자</div>
-  <div class="tab" onclick="filterTab('sg', this)">싱가포르</div>
+
 </div>
 
 <div class="content">
@@ -113,7 +110,6 @@
 
 <script>
 let allNews = [];
-let currentFilter = 'all';
 const READ_KEY = 'readNews';
 
 function getReadUrls() {
@@ -141,29 +137,17 @@ function updateClock() {
   document.getElementById('nextUpdate').textContent = `${Math.floor(diff/60)}h ${diff%60}m`;
 }
 
-function filterTab(type, el) {
-  currentFilter = type;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  renderNews();
-}
-
 function renderNews() {
   const grid = document.getElementById('newsGrid');
-  const filtered = currentFilter === 'all' ? allNews : allNews.filter(n => n.category === currentFilter);
-  const labels = { all: '오늘의 뉴스', sg: '싱가포르 뉴스', global: '글로벌', alt: '대체투자' };
-  document.getElementById('sectionLabel').textContent = labels[currentFilter];
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="empty">해당 카테고리 뉴스가 없습니다.</div>';
+  document.getElementById('sectionLabel').textContent = '오늘의 뉴스';
+  if (!allNews.length) {
+    grid.innerHTML = '<div class="empty">뉴스가 없습니다.</div>';
     return;
   }
-
   const read = getReadUrls();
-  const unread = filtered.filter(n => !read.has(n.url));
-  const readItems = filtered.filter(n => read.has(n.url));
+  const unread = allNews.filter(n => !read.has(n.url));
+  const readItems = allNews.filter(n => read.has(n.url));
   const sorted = [...unread, ...readItems];
-
   grid.innerHTML = sorted.map(n => {
     const isRead = read.has(n.url);
     return `
