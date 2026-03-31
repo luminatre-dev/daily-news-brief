@@ -1,33 +1,78 @@
 {
-  "updated_at": "2026-03-31T14:06:28.516602+08:00",
-  "updated_at_display": "2026-03-31 14:06 SGT",
+  "updated_at": "2026-03-31T14:35:57.069463+08:00",
+  "updated_at_display": "2026-03-31 14:35 SGT",
   "news": [
     {
-      "title": "[런던베이글 M&A] 1600억 주고 샀는데…창업주 리스크 JKL로 불똥",
-      "summary": "JKL파트너스가 인수한 런던베이글뮤지엄의 직원 과로사 의혹과 국세청 조사로 인수 리스크 확산",
-      "source": "dealsite.co.kr",
-      "url": "https://dealsite.co.kr/articles/157130",
+      "title": "아주IB투자 상한가 급등, 야놀자 IPO 기대감 확산",
+      "summary": "아주IB투자가 26일 29.88% 상한가를 기록하며 야놀자 나스닥 IPO와 정부 모태펀드 확대 정책이 투자 호재로 작용했다.",
+      "source": "stock1.brokdam.com",
+      "url": "https://stock1.brokdam.com/%EC%95%84%EC%A3%BCib%ED%88%AC%EC%9E%90-%EC%83%81%EC%8A%B9-%EC%9D%B4%EC%9C%A0-3%EA%B0%80%EC%A7%80-%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4x%C2%B7%EC%95%BC%EB%86%80%EC%9E%90%C2%B7%EB%B0%94%EC%9D%B4",
       "category": "alt",
-      "categoryLabel": "한국딜",
-      "time": "2026-02-20"
+      "categoryLabel": "대체투자",
+      "time": "2026-03-26T00:00:00Z"
     },
     {
-      "title": "롯데렌탈 M&A 불발 함의? \"인수가격 신주 물타기 불가·상장사도 전량매수 고려\"",
-      "summary": "어피너티의 롯데렌탈 인수가 공정위 승인 거부로 불발되며 M&A 시장에 미치는 영향 분석",
-      "source": "investchosun.com",
-      "url": "https://www.investchosun.com/site/data/html_dir/2026/01/27/2026012780130.html",
+      "title": "2026년 벤처캐피탈 시장 역대급 호황 진입",
+      "summary": "정부가 모태펀드 출자 규모를 1조6천억 원으로 확대하고 연간 총 벤처투자 목표를 40조 원으로 상향 발표했다.",
+      "source": "stock1.brokdam.com",
+      "url": "https://stock1.brokdam.com/%EC%95%84%EC%A3%BCib%ED%88%AC%EC%9E%90-%EA%B4%80%EB%A0%A8%EC%A3%BC-top-10-%EC%95%BC%EB%86%80%EC%9E%90%C2%B7%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4x%C2%B7%EB%B0%94%EC%9D%B4%EC%98%A4",
       "category": "alt",
-      "categoryLabel": "한국딜",
-      "time": "2026-01-27"
+      "categoryLabel": "대체투자",
+      "time": "2026-03-26T00:00:00Z"
     },
     {
-      "title": "2026년 1월 한국 스타트업 투자 통계",
-      "summary": "2026년 1월 스타트업 투자 94건·4359억원 집계, AI 플랫폼 클러쉬 380억원 프리IPO 유치",
+      "title": "국내 스타트업 투자 시장 3월 1조원 돌파",
+      "summary": "3월 한국 스타트업 투자가 총 228건으로 전년대비 14% 감소했으나 바이오/의료 분야가 36건으로 최다 투자를 기록했다.",
       "source": "thevc.kr",
-      "url": "https://thevc.kr/discussions/korea_startup_funding_2026_01",
+      "url": "https://thevc.kr/browse/startups",
       "category": "alt",
-      "categoryLabel": "한국딜",
-      "time": "2026-02-02"
+      "categoryLabel": "대체투자",
+      "time": "2026-03-26T00:00:00Z"
+    },
+    {
+      "title": "중동 지정학적 리스크로 글로벌 유가 급등",
+      "summary": "중동 전쟁 여파로 국제 유가가 상승 압력을 받으며 연준의 금리 인하 시점이 불투명해지고 있다.",
+      "source": "cliktoday.com",
+      "url": "https://www.cliktoday.com/2026/03/20260330-today-news.html",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "2026-03-30T00:00:00Z"
+    },
+    {
+      "title": "IMF, 2026년 세계경제 3.0% 성장 전망",
+      "summary": "IMF가 한국 경제는 2026년 1.8%로 반등하며 회복세를 보일 것으로 전망하고 아시아 경제는 4.1%로 둔화될 것으로 예상했다.",
+      "source": "kiep.go.kr",
+      "url": "https://www.kiep.go.kr/board.es?mid=a10503000000&bid=0025&act=view&list_no=23239&tag=&nPage=1",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "2026-03-02T00:00:00Z"
+    },
+    {
+      "title": "Pete Hegseth’s broker looked to buy defence fund before Iran attack",
+      "summary": "Morgan Stanley wealth manager approached BlackRock about multimillion-dollar investment for US defen...",
+      "source": "FT",
+      "url": "https://www.ft.com/content/744ea8dc-6d93-4fe9-a5e3-36de4f5d06db",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
+    },
+    {
+      "title": "Kuwaiti oil tanker struck off Dubai",
+      "summary": "Oil pares gains as fire on vessel under control and Asian markets extend sell-off",
+      "source": "FT",
+      "url": "https://www.ft.com/content/b2c83041-9291-41ac-9377-257d8b1b53ad",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
+    },
+    {
+      "title": "Iran’s hackers go to war",
+      "summary": "Tehran’s cyber operatives have sought to sow fear and hoover up intelligence in series of attacks in...",
+      "source": "FT",
+      "url": "https://www.ft.com/content/f2562e46-2b23-4553-9488-6c7549207539",
+      "category": "global",
+      "categoryLabel": "글로벌",
+      "time": "FT"
     }
   ]
 }
