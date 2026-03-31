@@ -11,6 +11,7 @@ client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 sgt = pytz.timezone('Asia/Singapore')
 now = datetime.now(sgt)
 today = now.strftime('%Y년 %m월 %d일')
+week_ago = (now - timedelta(days=7)).strftime('%Y년 %m월 %d일')
 weekday = now.weekday()
 is_weekend = weekday >= 5
 
@@ -27,119 +28,67 @@ try:
 except:
     pass
 
-# RSS 피드 목록
-RSS_FEEDS = {
-    "sg": [
-        ("https://www.straitstimes.com/news/singapore/rss.xml", "Straits Times"),
-        ("https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=10416", "CNA"),
-        ("https://www.businesstimes.com.sg/rss/all", "Business Times"),
-    ],
-    "global_econ": [
-        ("https://www.ft.com/rss/home", "FT"),
-        ("https://feeds.reuters.com/reuters/businessNews", "Reuters Business"),
-        ("https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml", "NYT Economy"),
-    ],
-    "us_politics": [
-        ("https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml", "NYT Politics"),
-        ("https://feeds.washingtonpost.com/rss/politics", "Washington Post"),
-        ("https://rss.nytimes.com/services/xml/rss/nyt/US.xml", "NYT US"),
-    ],
-    "kr_econ": [
-        ("https://www.hankyung.com/feed/finance", "한국경제"),
-        ("https://www.mk.co.kr/rss/30100041/", "매일경제"),
-        ("https://platum.kr/feed", "플래텀"),
-        ("https://www.etnews.com/rss/allArticleList.xml", "전자신문"),
-        ("https://www.zdnet.co.kr/rss/news/", "ZDNet Korea"),
-    ]
-}
-
-def fetch_rss(url, source, max_items=5):
+# FT RSS
+def fetch_ft_news(max_items=3):
     try:
-        res = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
-        # XML 파싱 오류 대비 — 인코딩 정리
-        content = res.content.replace(b'\x00', b'')
-        try:
-            root = ET.fromstring(content)
-        except ET.ParseError:
-            # lxml 없이 간단히 재시도 — utf-8 강제
-            content = res.text.encode('utf-8', errors='ignore')
-            root = ET.fromstring(content)
+        res = requests.get("https://www.ft.com/rss/home", timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+        root = ET.fromstring(res.content)
         items = []
-        for item in root.findall(".//item")[:max_items]:
+        for item in root.findall(".//item")[:max_items * 2]:
             title = item.findtext("title", "").strip()
             link = item.findtext("link", "").strip()
             desc = item.findtext("description", "").strip()
             if title and link and link not in existing_news_urls:
-                items.append({"title": title, "desc": desc[:150], "url": link, "source": source})
+                items.append({
+                    "title": title,
+                    "summary": desc[:100] + "..." if len(desc) > 100 else desc,
+                    "source": "FT",
+                    "url": link,
+                    "category": "global",
+                    "categoryLabel": "글로벌",
+                    "time": "FT"
+                })
+            if len(items) >= max_items:
+                break
         return items
     except Exception as e:
-        print(f"RSS 오류 ({source}): {e}")
+        print(f"FT RSS 오류: {e}")
         return []
 
-def collect_rss_candidates():
-    candidates = {}
-    for category, feeds in RSS_FEEDS.items():
-        candidates[category] = []
-        for url, source in feeds:
-            candidates[category] += fetch_rss(url, source, 5)
-    return candidates
+# 평일 뉴스 수집
+def fetch_weekday_news():
+    exclude_urls = list(existing_news_urls)[:20]
 
-def curate_with_claude(candidates):
-    """Claude가 RSS 후보에서 선별 + 요약 (웹검색 없이)"""
     response = client.messages.create(
         model="claude-sonnet-4-20250514",
-        max_tokens=2000,
-        system=f"""You are a news curator. Select and summarize from candidate news items.
-Return a JSON array with exactly these selections:
-- 3 Singapore news (politics, economy, society focused) → category: "sg", categoryLabel: "싱가포르"
-- 3 Global economy news (major economic news from FT/Reuters/Bloomberg) → category: "global", categoryLabel: "글로벌경제"
-- 3 US politics news → category: "us", categoryLabel: "미국정치"
-- 6 Korean economy/finance news most relevant to: 대체투자, 인수합병, 스타트업투자, VC, PE, 사모펀드, 운용사, GP/LP 동향, 인력이동, 주요인사 → category: "alt", categoryLabel: "한국경제"
-Each item: {{ title (original language), summary (1 sentence in Korean, max 30 words), source, url, category, categoryLabel, time: "오늘" }}
+        max_tokens=1500,
+        tools=[{"type": "web_search_20250305", "name": "web_search"}],
+        system=f"""You are a news aggregator. Search and return ONLY a JSON array with exactly 5 news items.
+Search date range: {week_ago} ~ {today} (last 7 days only).
+Find:
+- 3 Korean alternative investment news covering: 바이아웃, VC투자, Growth투자, 스타트업투자, M&A, 인수합병, 인사동향, GP/LP, 사모펀드, 운용사 동향. Search across: dealsite.co.kr, investchosun.com, thevc.kr, hankyung.com, mk.co.kr, etnews.com, platum.kr and any relevant Korean financial news sites → category: "alt", categoryLabel: "대체투자"
+- 2 Global economy news (major international economic developments) → category: "global", categoryLabel: "글로벌"
+Exclude these already collected URLs: {exclude_urls}
+Each item: {{ title, summary (1 sentence in Korean, max 30 words), source, url, category, categoryLabel, time }}
 Return ONLY valid JSON array. No markdown. No explanation.""",
-        messages=[{"role": "user", "content": f"Today: {today}\nCandidates:\n{json.dumps(candidates, ensure_ascii=False)}"}]
+        messages=[{"role": "user", "content": f"{week_ago}부터 {today}까지 최신 뉴스 5개를 JSON 배열로 반환해주세요."}]
     )
+
     text = next((b.text for b in response.content if b.type == "text"), "")
     if not text.strip():
-        print("⚠️ Claude 응답 없음 - 후보 뉴스 그대로 사용")
+        print("⚠️ Claude 응답 없음")
         return []
     text = text.strip().replace("```json", "").replace("```", "").strip()
     s, e = text.find('['), text.rfind(']')
     try:
-        return json.loads(text[s:e+1]) if s != -1 else []
+        news_list = json.loads(text[s:e+1]) if s != -1 else []
     except Exception as ex:
         print(f"⚠️ JSON 파싱 오류: {ex}")
-        return []
+        news_list = []
 
-def fetch_kr_deal_news():
-    """딜사이트, 투자조선, thevc 웹검색으로 각 1개"""
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=800,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        system="""Search for latest news from dealsite.co.kr, investchosun.com, thevc.kr.
-Find 1 article from each site (total 3) about: 대체투자, M&A, 바이아웃, VC투자, PE딜, 스타트업투자, 인력이동, GP/LP.
-Return ONLY a JSON array. Each item: { title, summary (1 sentence in Korean, max 30 words), source, url, category: "alt", categoryLabel: "한국딜", time }
-No markdown.""",
-        messages=[{"role": "user", "content": f"{today} dealsite.co.kr investchosun.com thevc.kr 최신 딜/투자 뉴스 각 1개씩"}]
-    )
-    text = next((b.text for b in response.content if b.type == "text"), "[]")
-    text = text.strip().replace("```json", "").replace("```", "").strip()
-    s, e = text.find('['), text.rfind(']')
-    items = json.loads(text[s:e+1]) if s != -1 else []
-    return [i for i in items if i.get("url") not in existing_news_urls]
-
-def fetch_weekday_news():
-    print("📡 RSS 수집 중...")
-    candidates = collect_rss_candidates()
-
-    print("🤖 Claude 선별 중...")
-    curated = curate_with_claude(candidates)
-
-    print("🔍 딜사이트/투자조선/thevc 검색 중...")
-    deal_news = fetch_kr_deal_news()
-
-    return curated + deal_news
+    # FT RSS 추가
+    ft_news = fetch_ft_news(max_items=3)
+    return news_list + ft_news
 
 # 주말 커머디티 뉴스 수집
 def fetch_commodity_news():
@@ -159,10 +108,16 @@ Exclude URLs: {exclude_urls}
 Return ONLY valid JSON array. No markdown.""",
         messages=[{"role": "user", "content": f"This week's ({date_range}) commodity market-moving news. JSON array only."}]
     )
-    text = next((b.text for b in response.content if b.type == "text"), "[]")
+
+    text = next((b.text for b in response.content if b.type == "text"), "")
+    if not text.strip():
+        return []
     text = text.strip().replace("```json", "").replace("```", "").strip()
     s, e = text.find('['), text.rfind(']')
-    items = json.loads(text[s:e+1]) if s != -1 else []
+    try:
+        items = json.loads(text[s:e+1]) if s != -1 else []
+    except:
+        items = []
     return [i for i in items if i.get("url") not in existing_commodity_urls]
 
 # 메인 실행
