@@ -1,12 +1,15 @@
-import anthropic
 import json
 import os
 import xml.etree.ElementTree as ET
 import requests
 from datetime import datetime, timedelta
 import pytz
+import google.generativeai as genai
+from google.generativeai.types import Tool, GenerateContentConfig
+from google.generativeai import protos
 
-client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+# Google Gemini 클라이언트 설정
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
 sgt = pytz.timezone('Asia/Singapore')
 now = datetime.now(sgt)
@@ -55,28 +58,41 @@ def fetch_ft_news(max_items=3):
         print(f"FT RSS 오류: {e}")
         return []
 
+# Gemini로 텍스트 생성 (Google Search Grounding 사용)
+def call_gemini(system_prompt, user_prompt):
+    model = genai.GenerativeModel(
+        model_name="gemini-2.0-flash",
+        system_instruction=system_prompt,
+        tools=[Tool(google_search=protos.GoogleSearch())]
+    )
+    response = model.generate_content(
+        user_prompt,
+        generation_config=GenerateContentConfig(
+            max_output_tokens=1500,
+            temperature=0.1,
+        )
+    )
+    return response.text if response.text else ""
+
 # 평일 뉴스 수집
 def fetch_weekday_news():
     exclude_urls = list(existing_news_urls)[:20]
 
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1500,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        system=f"""You are a news aggregator. Search and return ONLY a JSON array with exactly 5 news items.
+    system_prompt = f"""You are a news aggregator. Search and return ONLY a JSON array with exactly 5 news items.
 Search date range: {week_ago} ~ {today} (last 7 days only).
 Find:
 - 3 Korean alternative investment news covering: 바이아웃, VC투자, Growth투자, 스타트업투자, M&A, 인수합병, 인사동향, GP/LP, 사모펀드, 운용사 동향. Search across: dealsite.co.kr, investchosun.com, thevc.kr, hankyung.com, mk.co.kr, etnews.com, platum.kr and any relevant Korean financial news sites → category: "alt", categoryLabel: "대체투자"
 - 2 Global economy news (major international economic developments) → category: "global", categoryLabel: "글로벌"
 Exclude these already collected URLs: {exclude_urls}
 Each item: {{ title, summary (1 sentence in Korean, max 30 words), source, url, category, categoryLabel, time }}
-Return ONLY valid JSON array. No markdown. No explanation.""",
-        messages=[{"role": "user", "content": f"{week_ago}부터 {today}까지 최신 뉴스 5개를 JSON 배열로 반환해주세요."}]
-    )
+Return ONLY valid JSON array. No markdown. No explanation."""
 
-    text = next((b.text for b in response.content if b.type == "text"), "")
+    user_prompt = f"{week_ago}부터 {today}까지 최신 뉴스 5개를 JSON 배열로 반환해주세요."
+
+    text = call_gemini(system_prompt, user_prompt)
+
     if not text.strip():
-        print("⚠️ Claude 응답 없음")
+        print("⚠️ Gemini 응답 없음")
         return []
     text = text.strip().replace("```json", "").replace("```", "").strip()
     s, e = text.find('['), text.rfind(']')
@@ -97,19 +113,16 @@ def fetch_commodity_news():
     date_range = f"{monday.strftime('%Y-%m-%d')} 00:00 SGT ~ {now.strftime('%Y-%m-%d %H:%M')} SGT"
     exclude_urls = list(existing_commodity_urls)[:20]
 
-    response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1500,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        system=f"""You are a commodity market news aggregator. Return ONLY a JSON array.
+    system_prompt = f"""You are a commodity market news aggregator. Return ONLY a JSON array.
 Each item: {{ title, summary (1 sentence in English, max 30 words), source, url, commodity (Gold/Silver/Platinum|Copper|Crude Oil|Corn|Wheat|Soybean|Coffee), price_impact (up/down/mixed), time }}
 Find news from {date_range} that moved prices in: Precious Metals, Copper, Crude Oil, Corn, Wheat, Soybean, Coffee.
 Exclude URLs: {exclude_urls}
-Return ONLY valid JSON array. No markdown.""",
-        messages=[{"role": "user", "content": f"This week's ({date_range}) commodity market-moving news. JSON array only."}]
-    )
+Return ONLY valid JSON array. No markdown."""
 
-    text = next((b.text for b in response.content if b.type == "text"), "")
+    user_prompt = f"This week's ({date_range}) commodity market-moving news. JSON array only."
+
+    text = call_gemini(system_prompt, user_prompt)
+
     if not text.strip():
         return []
     text = text.strip().replace("```json", "").replace("```", "").strip()
