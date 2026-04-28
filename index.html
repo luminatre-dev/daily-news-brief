@@ -132,8 +132,9 @@ function updateClock() {
   const h = String(sgt.getHours()).padStart(2,'0');
   const m = String(sgt.getMinutes()).padStart(2,'0');
   document.getElementById('sgTime').textContent = `SGT ${h}:${m}`;
-  let diff = (7 * 60) - (sgt.getHours() * 60 + sgt.getMinutes());
-  if (diff < 0) diff += 1440;
+  const cur = sgt.getHours() * 60 + sgt.getMinutes();
+  const targets = [7 * 60, 15 * 60];
+  let diff = Math.min(...targets.map(t => t > cur ? t - cur : t + 1440 - cur));
   document.getElementById('nextUpdate').textContent = `${Math.floor(diff/60)}h ${diff%60}m`;
 }
 
@@ -168,7 +169,6 @@ function renderNews() {
 function handleCardClick(el, url) {
   markRead(url);
   el.classList.add('is-read');
-  // 맨 아래로 이동
   const grid = document.getElementById('newsGrid');
   grid.appendChild(el);
   window.open(url, '_blank');
@@ -188,7 +188,6 @@ async function loadNews() {
     document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated_at_display}`;
     renderNews();
 
-    // 커머디티 뉴스
     if (data.commodity_news && data.commodity_news.length > 0) {
       document.getElementById('commoditySection').style.display = 'block';
       document.getElementById('commodityUpdated').textContent = data.commodity_updated_display || '';
