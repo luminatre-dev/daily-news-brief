@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: pip install google-generativeai requests beautifulsoup4 pytz
+        run: pip install google-genai requests beautifulsoup4 pytz
       - name: Fetch news with Gemini
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
