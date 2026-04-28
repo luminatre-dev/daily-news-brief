@@ -1,47 +1,31 @@
 name: Daily News Update
-
 on:
   schedule:
     - cron: '0 23 * * 1-5'   # 07:00 SGT (월-금)
-    - cron: '0 1 * * 1-5'    # 09:00 SGT (월-금)
-    - cron: '0 3 * * 1-5'    # 11:00 SGT (월-금)
-    - cron: '0 5 * * 1-5'    # 13:00 SGT (월-금)
     - cron: '0 7 * * 1-5'    # 15:00 SGT (월-금)
-    - cron: '0 9 * * 1-5'    # 17:00 SGT (월-금)
-    - cron: '0 14 * * 1-5'   # 22:00 SGT (월-금)
-    - cron: '0 10 * * 6'     # 18:00 SGT (토)
-    - cron: '0 12 * * 6'     # 20:00 SGT (토)
-    - cron: '0 14 * * 6'     # 22:00 SGT (토)
-    - cron: '0 16 * * 6'     # 00:00 SGT (일)
-    - cron: '0 18 * * 6'     # 02:00 SGT (일)
-    - cron: '0 20 * * 6'     # 04:00 SGT (일)
-    - cron: '0 22 * * 6'     # 06:00 SGT (일)
-    - cron: '0 0 * * 0'      # 08:00 SGT (일)
+    - cron: '0 23 * * 6'     # 07:00 SGT (토)
+    - cron: '0 7 * * 6'      # 15:00 SGT (토)
+    - cron: '0 23 * * 0'     # 07:00 SGT (일)
+    - cron: '0 7 * * 0'      # 15:00 SGT (일)
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
-        run: pip install anthropic requests beautifulsoup4 pytz
-
-      - name: Fetch news with Claude
+        run: pip install google-generativeai requests beautifulsoup4 pytz
+      - name: Fetch news with Gemini
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: python fetch_news.py
-
       - name: Commit & push news data
         run: |
           git config user.name "News Bot"
