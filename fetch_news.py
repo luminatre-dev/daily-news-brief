@@ -4,12 +4,11 @@ import xml.etree.ElementTree as ET
 import requests
 from datetime import datetime, timedelta
 import pytz
-import google.generativeai as genai
-from google.generativeai.types import Tool, GenerateContentConfig
-from google.generativeai import protos
+from google import genai
+from google.genai import types
 
 # Google Gemini 클라이언트 설정
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
 
 sgt = pytz.timezone('Asia/Singapore')
 now = datetime.now(sgt)
@@ -58,19 +57,17 @@ def fetch_ft_news(max_items=3):
         print(f"FT RSS 오류: {e}")
         return []
 
-# Gemini로 텍스트 생성 (Google Search Grounding 사용)
+# Gemini 호출
 def call_gemini(system_prompt, user_prompt):
-    model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash",
-        system_instruction=system_prompt,
-        tools=[Tool(google_search=protos.GoogleSearch())]
-    )
-    response = model.generate_content(
-        user_prompt,
-        generation_config=GenerateContentConfig(
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
             max_output_tokens=1500,
             temperature=0.1,
-        )
+            tools=[types.Tool(google_search=types.GoogleSearch())]
+        ),
+        contents=user_prompt
     )
     return response.text if response.text else ""
 
@@ -102,7 +99,6 @@ Return ONLY valid JSON array. No markdown. No explanation."""
         print(f"⚠️ JSON 파싱 오류: {ex}")
         news_list = []
 
-    # FT RSS 추가
     ft_news = fetch_ft_news(max_items=3)
     return news_list + ft_news
 
