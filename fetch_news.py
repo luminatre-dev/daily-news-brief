@@ -60,7 +60,7 @@ def fetch_ft_news(max_items=3):
 # Gemini 호출
 def call_gemini(system_prompt, user_prompt):
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.0-flash-lite",
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
             max_output_tokens=1500,
